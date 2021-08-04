@@ -43,6 +43,7 @@ namespace NSudoku
         {
             var previous = _placedDigit;
             _placedDigit = AssertRange(value);
+            Candidates.Clear();
             return _placedDigit != previous;
         }
     }

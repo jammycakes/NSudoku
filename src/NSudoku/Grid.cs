@@ -13,6 +13,8 @@ namespace NSudoku
 
         public byte Size { get; }
 
+        public IList<IConstraint> Constraints { get; } = new List<IConstraint>();
+
         public Grid(byte size)
         {
             if (size < 4 || size > MaxSize) {
