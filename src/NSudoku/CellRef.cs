@@ -5,16 +5,14 @@ namespace NSudoku
 {
     public struct CellRef
     {
-        public const int MaxSize = 32;
+        public byte Row { get; }
 
-        public int Row { get; }
+        public byte Column { get; }
 
-        public int Column { get; }
-
-        public CellRef(int row, int column)
+        internal CellRef(byte row, byte column, Grid grid)
         {
-            if (row < 1 || row > MaxSize || column < 1 || column > MaxSize) {
-                throw new ArgumentException($"Cell references must be between 1 and {MaxSize}");
+            if (row < 1 || row > grid.Size || column < 1 || column > grid.Size) {
+                throw new ArgumentException($"Cell references must be between 1 and {grid.Size}");
             }
 
             Row = row;
@@ -33,8 +31,12 @@ namespace NSudoku
 
         public override int GetHashCode()
         {
-            return ((int)Row) * MaxSize + Column;
+            return ((int)Row) * Grid.MaxSize + Column;
         }
+
+        public static bool operator ==(CellRef ref1, CellRef ref2) => ref1.Equals(ref2);
+
+        public static bool operator !=(CellRef ref1, CellRef ref2) => !ref1.Equals(ref2);
 
         public override string ToString()
         {

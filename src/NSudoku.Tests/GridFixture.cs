@@ -10,10 +10,10 @@ namespace NSudoku.Tests
         public void CellRefsShouldBeCorrect()
         {
             var grid = new Grid(9);
-            for (var row = 1; row <= 9; row++) {
-                for (var column = 1; column <= 9; column++) {
-                    var cellRef = new CellRef(row, column);
-                    grid[cellRef].Ref.Should().Be(cellRef);
+            for (byte row = 1; row <= 9; row++) {
+                for (byte column = 1; column <= 9; column++) {
+                    grid[row, column].Ref.Row.Should().Be(row);
+                    grid[row, column].Ref.Column.Should().Be(column);
                 }
             }
         }
