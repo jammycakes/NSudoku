@@ -20,7 +20,7 @@ namespace NSudoku.Strategies
         {
             return
                 from constraint in grid.Constraints
-                from cell in constraint.Apply(grid)
+                from cell in constraint.Apply()
                 select cell;
         }
 
