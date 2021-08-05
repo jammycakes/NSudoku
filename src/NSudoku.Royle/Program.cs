@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NSudoku.Solving;
+using NSudoku.Strategies;
 
 namespace NSudoku.Royle
 {
@@ -13,7 +14,8 @@ namespace NSudoku.Royle
         static async Task Main(string[] args)
         {
             var solver = new Solver()
-                .AddSingleStrategies(true);
+                .AddSingleStrategies(true)
+                .Add<NakedPairStrategy>();
 
             using (var resource = File.OpenRead("royle.txt"))
             using (var reader = new StreamReader(resource))
