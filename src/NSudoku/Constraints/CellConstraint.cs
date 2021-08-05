@@ -10,6 +10,7 @@ namespace NSudoku.Constraints
         {
             Cells = cells.ToList().AsReadOnly();
             Unique = unique;
+            Grid = Cells.Select(c => c.Grid).Distinct().Single();
         }
 
         public IEnumerable<Cell> GetCellsVisibleTo(Cell cell)
@@ -22,11 +23,11 @@ namespace NSudoku.Constraints
             }
         }
 
-        public virtual IEnumerable<Cell> Apply(Grid grid)
+        public virtual IEnumerable<Cell> Apply()
         {
             var changed = new HashSet<Cell>();
             if (Unique) {
-                foreach (var cell in grid.Where(c => c.HasDigit)) {
+                foreach (var cell in Grid.Where(c => c.HasDigit)) {
                     var visibleCells = GetCellsVisibleTo(cell);
                     foreach (var seen in visibleCells) {
                         if (seen.Candidates.Remove(cell.Digit.Value)) {
@@ -40,6 +41,8 @@ namespace NSudoku.Constraints
         }
 
         public ICollection<Cell> Cells { get; }
+
+        public Grid Grid { get; }
 
         public bool Unique { get; }
     }

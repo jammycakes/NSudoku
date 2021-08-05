@@ -28,7 +28,7 @@ namespace NSudoku.Solving
             }
 
             foreach (var constraint in Grid.Constraints) {
-                constraint.Apply(Grid);
+                constraint.Apply();
             }
         }
 
