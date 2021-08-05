@@ -15,7 +15,8 @@ namespace NSudoku.Royle
         {
             var solver = new Solver()
                 .AddSingleStrategies(true)
-                .Add<NakedPairStrategy>();
+                .Add<NakedPairStrategy>()
+                .Add<IntersectionStrategy>();
 
             using (var resource = File.OpenRead("royle.txt"))
             using (var reader = new StreamReader(resource))
