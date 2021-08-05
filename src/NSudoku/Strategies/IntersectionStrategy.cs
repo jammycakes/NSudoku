@@ -53,7 +53,7 @@ namespace NSudoku.Strategies
                 }
             }
 
-            return null;
+            return StrategyResult.Unchanged;
         }
     }
 }
