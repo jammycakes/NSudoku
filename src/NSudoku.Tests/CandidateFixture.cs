@@ -50,7 +50,7 @@ namespace NSudoku.Tests
         {
             var candidates = new Candidates(9);
             candidates.AddAll();
-            candidates.Count().Should().Be(9);
+            candidates.Count.Should().Be(9);
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace NSudoku.Tests
             candidates.Add(1);
             candidates.Add(3);
             candidates.Add(7);
-            candidates.Count().Should().Be(3);
+            candidates.Count.Should().Be(3);
         }
     }
 }

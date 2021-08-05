@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NSudoku
 {
-    public class Candidates
+    public class Candidates : IEnumerable<byte>
     {
         private byte _size;
 
@@ -53,21 +54,23 @@ namespace NSudoku
             _selection = 0;
         }
 
-        public IEnumerable<byte> GetCandidates()
+        public int Count
+        {
+            get {
+                var i = _selection;
+                i = i - ((i >> 1) & 0x55555555);
+                i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+                return (int)(((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+            }
+        }
+
+        public IEnumerator<byte> GetEnumerator()
         {
             for (byte i = 1; i <= _size; i++) {
                 if (Has(i)) {
                     yield return i;
                 }
             }
-        }
-
-        public int Count()
-        {
-            var i = _selection;
-            i = i - ((i >> 1) & 0x55555555);
-            i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-            return (int)(((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
         }
 
         public override bool Equals(object obj)
@@ -88,6 +91,11 @@ namespace NSudoku
         }
 
         public override string ToString()
-            => String.Concat(GetCandidates().Select(b => b.ToString()));
+            => String.Concat(this.Select(b => b.ToString()));
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

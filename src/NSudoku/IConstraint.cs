@@ -15,7 +15,8 @@ namespace NSudoku
         ///  Applies this constraint to the grid. This means eliminating candidates that are
         ///  disallowed by this constraint for the given digits.
         /// </summary>
-        /// <param name="grid"></param>
-        void Apply(Grid grid);
+        /// <param name="grid">The grid.</param>
+        /// <returns>The cells that have been changed by applying this constraint.</returns>
+        IEnumerable<Cell> Apply(Grid grid);
     }
 }

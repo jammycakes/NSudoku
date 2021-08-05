@@ -53,5 +53,24 @@ namespace NSudoku
         {
             return GetEnumerator();
         }
+
+        public static Grid Parse(string givens)
+        {
+            var size = (int)Math.Floor(Math.Sqrt(givens.Length));
+            if (size * size != givens.Length) {
+                throw new ArgumentException("Length of the givens string is not a perfect square.");
+            }
+
+            var grid = new Grid((byte)size).AddDefaultConstraints();
+            for (var ix = 0; ix < givens.Length; ix++) {
+                var row = (byte)(ix / size + 1);
+                var column = (byte)(ix % size + 1);
+                if (byte.TryParse(givens.Substring(ix, 1), out var digit) && digit > 0) {
+                    grid[row, column].SetGivenDigit(digit);
+                }
+            }
+
+            return grid;
+        }
     }
 }

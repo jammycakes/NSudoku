@@ -22,16 +22,21 @@ namespace NSudoku.Constraints
             }
         }
 
-        public virtual void Apply(Grid grid)
+        public virtual IEnumerable<Cell> Apply(Grid grid)
         {
+            var changed = new HashSet<Cell>();
             if (Unique) {
                 foreach (var cell in grid.Where(c => c.HasDigit)) {
                     var visibleCells = GetCellsVisibleTo(cell);
                     foreach (var seen in visibleCells) {
-                        seen.Candidates.Remove(cell.Digit.Value);
+                        if (seen.Candidates.Remove(cell.Digit.Value)) {
+                            changed.Add(seen);
+                        };
                     }
                 }
             }
+
+            return changed;
         }
 
         public ICollection<Cell> Cells { get; }

@@ -38,5 +38,7 @@ namespace NSudoku.Constraints
                 from column in Enumerable.Range(left, regionWidth)
                 select grid[(byte)row, (byte)column];
         }
+
+        public override string ToString() => $"box {_region}";
     }
 }

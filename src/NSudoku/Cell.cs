@@ -56,5 +56,7 @@ namespace NSudoku
             Candidates.Clear();
             return _givenDigit != previous;
         }
+
+        public override string ToString() => HasDigit ? $"{Ref}: {Digit}" : $"{Ref}: [{Candidates}]";
     }
 }
