@@ -32,6 +32,10 @@ namespace NSudoku
                     ).ToArray();
         }
 
+        public int CountUnplacedDigits() => this.Where(c => !c.HasDigit).Count();
+
+        public int CountCandidates() => this.Where(c => !c.HasDigit).Sum(c => c.Candidates.Count());
+
         public Cell this[CellRef index] => _cells[index.Row - 1][index.Column - 1];
 
         public Cell this[byte row, byte column] => _cells[row - 1][column - 1];

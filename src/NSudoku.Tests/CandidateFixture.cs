@@ -44,5 +44,23 @@ namespace NSudoku.Tests
                 candidates.Has(i).Should().BeFalse();
             }
         }
+
+        [Fact]
+        public void CountCorrectlyWhenAllAdded()
+        {
+            var candidates = new Candidates(9);
+            candidates.AddAll();
+            candidates.Count().Should().Be(9);
+        }
+
+        [Fact]
+        public void CountCorrectlyWhenIndividualsAdded()
+        {
+            var candidates = new Candidates(9);
+            candidates.Add(1);
+            candidates.Add(3);
+            candidates.Add(7);
+            candidates.Count().Should().Be(3);
+        }
     }
 }
