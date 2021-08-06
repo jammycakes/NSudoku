@@ -23,7 +23,7 @@ namespace NSudoku.Tests.Strategies.Utilities
             grid[6, 9].Candidates.Add(3, 6, 7, 9);
 
             var constraint = new RowConstraint(grid, 6);
-            var lockedSets = constraint.FindLockedSets(2);
+            var lockedSets = constraint.FindLockedSets(2, false);
             var set = lockedSets.Single();
             set[0].Candidates.Should().BeEquivalentTo((byte)6, (byte)7);
         }

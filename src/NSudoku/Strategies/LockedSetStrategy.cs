@@ -9,11 +9,13 @@ namespace NSudoku.Strategies
     {
         private readonly int _size;
         private readonly string _description;
+        private readonly bool _hidden;
 
-        public LockedSetStrategy(int size, string description)
+        public LockedSetStrategy(int size, string description, bool hidden)
         {
             _size = size;
             _description = description;
+            _hidden = hidden;
         }
 
         public StrategyResult Apply(Grid grid)
@@ -21,7 +23,7 @@ namespace NSudoku.Strategies
             var lockedSets =
                 from constraint in grid.Constraints.OfType<ICellConstraint>()
                 where constraint.Unique
-                from lockedSet in constraint.FindLockedSets(_size)
+                from lockedSet in constraint.FindLockedSets(_size, _hidden)
                 select new {lockedSet, constraint};
 
             foreach (var set in lockedSets) {
@@ -36,10 +38,12 @@ namespace NSudoku.Strategies
                     var candidatesAsString = string.Join(",", candidates);
                     var othersAsString = string.Join(",", changed.Select(c => c.Ref));
                     var lockedSetAsString = string.Join(",", set.lockedSet.Select(c => c.Ref));
-                    return new StrategyResult(
-                        $"{this._description} in {set.constraint} in {lockedSetAsString}. " +
-                        $"Values {candidatesAsString} removed from cells {othersAsString}.",
-                        changed);
+                    var description = _hidden
+                        ? $"{this._description} in {set.constraint} in {othersAsString}. " +
+                          $"Values {candidatesAsString} removed."
+                        : $"{this._description} in {set.constraint} in {lockedSetAsString}. " +
+                          $"Values {candidatesAsString} removed from cells {othersAsString}.";
+                    return new StrategyResult(description, changed);
                 }
             }
 
@@ -63,24 +67,33 @@ namespace NSudoku.Strategies
         public override string ToString() => _description;
 
         public static LockedSetStrategy NakedPair { get; }
-            = new LockedSetStrategy(2, "Naked pair");
+            = new LockedSetStrategy(2, "Naked pair", false);
 
         public static LockedSetStrategy NakedTriple { get; }
-            = new LockedSetStrategy(3, "Naked triple");
+            = new LockedSetStrategy(3, "Naked triple", false);
 
         public static LockedSetStrategy NakedQuad { get; }
-            = new LockedSetStrategy(4, "Naked quad");
+            = new LockedSetStrategy(4, "Naked quad", false);
 
         public static LockedSetStrategy NakedQuintuple { get; }
-            = new LockedSetStrategy(5, "Naked quintuple");
+            = new LockedSetStrategy(5, "Naked quintuple", false);
 
         public static LockedSetStrategy NakedSextuple { get; }
-            = new LockedSetStrategy(6, "Naked sextuple");
+            = new LockedSetStrategy(6, "Naked sextuple", false);
 
         public static LockedSetStrategy NakedSeptuple { get; }
-            = new LockedSetStrategy(7, "Naked septuple");
+            = new LockedSetStrategy(7, "Naked septuple", false);
 
         public static LockedSetStrategy NakedOctuple { get; }
-            = new LockedSetStrategy(8, "Naked octuple");
+            = new LockedSetStrategy(8, "Naked octuple", false);
+
+        public static LockedSetStrategy HiddenPair { get; }
+            = new LockedSetStrategy(2, "Hidden pair", true);
+
+        public static LockedSetStrategy HiddenTriple { get; }
+            = new LockedSetStrategy(3, "Hidden triple", true);
+
+        public static LockedSetStrategy HiddenQuad { get; }
+            = new LockedSetStrategy(4, "Hidden quad", true);
     }
 }

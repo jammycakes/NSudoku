@@ -42,14 +42,20 @@ namespace NSudoku.Strategies.Utilities
         /// <param name="size">The size of the locked sets to find.</param>
         /// <returns></returns>
 
-        public static IEnumerable<Cell[]> FindLockedSets(this ICellConstraint constraint, int size)
+        public static IEnumerable<Cell[]> FindLockedSets(this ICellConstraint constraint, int size, bool hidden)
         {
             if (!constraint.Unique) {
                 yield break;
             }
 
-            var cellsToConsider = constraint.Cells
-                .Where(cell => !cell.HasDigit && cell.Candidates.Count <= size);
+            var availableCells = constraint.Cells.Where(cell => !cell.HasDigit);
+            var cellCount = availableCells.Count();
+
+            if (hidden) {
+                size = cellCount - size;
+            }
+
+            var cellsToConsider = availableCells.Where(cell => cell.Candidates.Count <= size);
 
             var combinations = cellsToConsider.Combinations(size).ToList();
             foreach (var combination in combinations) {

@@ -26,6 +26,10 @@ namespace NSudoku.Util
                 return false;
             }
 
+            if (size <= 0) {
+                yield break;
+            }
+
             var items = source.ToList();
             if (size > items.Count) {
                 yield break;

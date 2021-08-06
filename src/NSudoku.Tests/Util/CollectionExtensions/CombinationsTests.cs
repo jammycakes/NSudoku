@@ -64,5 +64,30 @@ namespace NSudoku.Tests.Util.CollectionExtensions
                 combinations[i].Should().BeEquivalentTo(results[i]);
             }
         }
+
+        [Fact]
+        public void ShouldSelectZeroOfThree()
+        {
+            var numbers = new[] {1, 2, 3};
+            var combinations = numbers.Combinations(0).ToList();
+            combinations.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void ShouldSelectZeroOfZero()
+        {
+            var numbers = new[] {1, 2, 3};
+            var combinations = numbers.Combinations(0).ToList();
+            combinations.Should().BeEmpty();
+        }
+
+
+        [Fact]
+        public void ShouldSelectThreeOfTwo()
+        {
+            var numbers = new[] {1, 2};
+            var combinations = numbers.Combinations(3).ToList();
+            combinations.Should().BeEmpty();
+        }
     }
 }
