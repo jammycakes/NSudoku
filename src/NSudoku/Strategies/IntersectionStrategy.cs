@@ -55,5 +55,7 @@ namespace NSudoku.Strategies
 
             return StrategyResult.Unchanged;
         }
+
+        public override string ToString() => "Intersection";
     }
 }

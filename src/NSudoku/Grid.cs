@@ -54,6 +54,11 @@ namespace NSudoku
             return GetEnumerator();
         }
 
+        public override string ToString()
+        {
+            return string.Concat(this.Select(c => c.Digit ?? (byte)0));
+        }
+
         public static Grid Parse(string givens)
         {
             var size = (int)Math.Floor(Math.Sqrt(givens.Length));
