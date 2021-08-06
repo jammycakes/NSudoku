@@ -47,5 +47,7 @@ namespace NSudoku.Strategies
 
             return (null, 0, null);
         }
+
+        public override string ToString() => $"Hidden single ({typeof(TRegion).Name})";
     }
 }

@@ -24,15 +24,14 @@ namespace NSudoku.Strategies
                 from lockedSet in constraint.FindLockedSets(_size)
                 select new {lockedSet, constraint};
 
-            var set = lockedSets.FirstOrDefault();
-            if (set != null) {
+            foreach (var set in lockedSets) {
                 var candidates = set.lockedSet.SelectMany(cell => cell.Candidates)
                     .Distinct()
                     .OrderBy(c => c)
                     .ToList();
 
                 var changed = RemoveOthers(set.constraint.Cells.Except(set.lockedSet), candidates)
-                        .OrderBy(c => c.ToString());
+                    .OrderBy(c => c.ToString());
                 if (changed.Any()) {
                     var candidatesAsString = string.Join(",", candidates);
                     var othersAsString = string.Join(",", changed.Select(c => c.Ref));
@@ -60,6 +59,8 @@ namespace NSudoku.Strategies
 
             return changed;
         }
+
+        public override string ToString() => _description;
 
         public static LockedSetStrategy NakedPair { get; }
             = new LockedSetStrategy(2, "Naked pair");

@@ -54,5 +54,7 @@ namespace NSudoku.Strategies
             var description = String.Join(", ", cells.Select(c => $"{c.Ref}={c.Digit}"));
             return (cells.Count > 1 ? "Naked singles: " : "Naked single: ") + description;
         }
+
+        public override string ToString() => "Naked single";
     }
 }

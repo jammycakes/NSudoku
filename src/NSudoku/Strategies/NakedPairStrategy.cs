@@ -55,5 +55,7 @@ namespace NSudoku.Strategies
 
             return changed;
         }
+
+        public override string ToString() => "Naked pair";
     }
 }
