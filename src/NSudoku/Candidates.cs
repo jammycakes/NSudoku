@@ -37,11 +37,31 @@ namespace NSudoku
             return _selection != previous;
         }
 
+        public bool Add(params byte[] digits)
+        {
+            var result = false;
+            foreach (var digit in digits) {
+                result = Add(digit) || result;
+            }
+
+            return result;
+        }
+
         public bool Remove(byte digit)
         {
             var previous = _selection;
             _selection &= ~ GetMask(digit);
             return _selection != previous;
+        }
+
+        public bool Remove(params byte[] digits)
+        {
+            var result = false;
+            foreach (var digit in digits) {
+                result = Remove(digit) || result;
+            }
+
+            return result;
         }
 
         public void AddAll()
