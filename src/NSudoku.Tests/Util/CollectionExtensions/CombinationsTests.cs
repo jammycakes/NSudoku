@@ -9,7 +9,7 @@ namespace NSudoku.Tests.Util.CollectionExtensions
     public class CombinationsTests
     {
         [Fact]
-        public void ShouldSelectCombinations()
+        public void ShouldSelectThreeOfFive()
         {
             var numbers = new[] {1, 2, 3, 4, 5};
 
@@ -25,6 +25,39 @@ namespace NSudoku.Tests.Util.CollectionExtensions
                 new[] {2, 3, 5},
                 new[] {2, 4, 5},
                 new[] {3, 4, 5}
+            };
+
+            for (var i = 0; i < combinations.Count; i++) {
+                combinations[i].Should().BeEquivalentTo(results[i]);
+            }
+        }
+
+        [Fact]
+        public void ShouldSelectTwoOfTwo()
+        {
+            var numbers = new[] {1, 2};
+
+            var combinations = numbers.Combinations(2).ToList();
+            var results = new[] {
+                new[] {1, 2}
+            };
+
+            for (var i = 0; i < combinations.Count; i++) {
+                combinations[i].Should().BeEquivalentTo(results[i]);
+            }
+        }
+
+
+        [Fact]
+        public void ShouldSelectTwoOfThree()
+        {
+            var numbers = new[] {1, 2, 3};
+
+            var combinations = numbers.Combinations(2).ToList();
+            var results = new[] {
+                new[] {1, 2},
+                new[] {1, 3},
+                new[] {2, 3},
             };
 
             for (var i = 0; i < combinations.Count; i++) {

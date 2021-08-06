@@ -51,7 +51,7 @@ namespace NSudoku.Strategies.Utilities
             var cellsToConsider = constraint.Cells
                 .Where(cell => !cell.HasDigit && cell.Candidates.Count <= size);
 
-            var combinations = cellsToConsider.Combinations(size);
+            var combinations = cellsToConsider.Combinations(size).ToList();
             foreach (var combination in combinations) {
                 var candidates = combination.SelectMany(c => c.Candidates).Distinct().ToList();
                 if (candidates.Count <= size) {

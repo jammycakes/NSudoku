@@ -9,25 +9,36 @@ namespace NSudoku.Util
     {
         public static IEnumerable<IList<T>> Combinations<T>(this IEnumerable<T> source, int size)
         {
+            bool Increment(int[] indexes, int max, int ix)
+            {
+                if (indexes[ix] < max) {
+                    indexes[ix]++;
+                    return true;
+                }
+                else if (ix > 0) {
+                    if (Increment(indexes, max - 1, ix - 1))
+                    {
+                        indexes[ix] = indexes[ix - 1] + 1;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
             var items = source.ToList();
             if (size > items.Count) {
                 yield break;
             }
 
-            int[] result = new int[size];
-            Stack<int> stack = new Stack<int>(size);
-            stack.Push(0);
-            while (stack.Count > 0) {
-                int index = stack.Count - 1;
-                int value = stack.Pop();
-                while (value < size) {
-                    result[index++] = value++;
-                    stack.Push(value);
-                    if (index != size) continue;
-                    yield return result.Select(ix => items[ix]).ToList();
-                    break;
-                }
+            var indexes = new int[size];
+            for (var ix = 0; ix < size; ix++) {
+                indexes[ix] = ix;
             }
+
+            do {
+                yield return indexes.Select(ix => items[ix]).ToList();
+            } while (Increment(indexes, items.Count - 1, size - 1));
         }
     }
 }
