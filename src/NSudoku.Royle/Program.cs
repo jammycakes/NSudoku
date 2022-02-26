@@ -22,6 +22,9 @@ namespace NSudoku.Royle
                 .Add(LockedSetStrategy.HiddenPair)
                 .Add(LockedSetStrategy.HiddenTriple)
                 .Add(LockedSetStrategy.HiddenQuad)
+                .Add(FishStrategy.XWing)
+                .Add(FishStrategy.Swordfish)
+                .Add(FishStrategy.Jellyfish)
                 ;
 
             using (var resource = File.OpenRead("royle.txt"))

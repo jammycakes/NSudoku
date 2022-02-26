@@ -66,18 +66,24 @@ namespace NSudoku.Strategies
                             }
                         }
 
-                        var strDimensions = string.Join(", ", dimension1.Select(d => d.ToString()));
-                        var strRemoved = string.Join(",", removed.Select(r => r.Ref.ToString()));
-                        var description =
-                            $"{_name} in {strDimensions}. " +
-                            $"Value {candidate} removed from {strRemoved}.";
-                        return new StrategyResult(description, removed);
+                        if (removed.Any()) {
+                            var strDimensions =
+                                string.Join(", ", dimension1.Select(d => d.ToString()));
+                            var strRemoved =
+                                string.Join(",", removed.Select(r => r.Ref.ToString()));
+                            var description =
+                                $"{_name} in {strDimensions}. " +
+                                $"Value {candidate} removed from {strRemoved}.";
+                            return new StrategyResult(description, removed);
+                        }
                     }
                 }
             }
 
             return StrategyResult.Unchanged;
         }
+
+        public override string ToString() => _name;
 
         public static FishStrategy XWing { get; } = new FishStrategy(2, "X-wing");
 

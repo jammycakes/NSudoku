@@ -66,5 +66,13 @@ namespace NSudoku.Tests.Strategies
                 grid[i, j].Candidates.Has(3).Should().Be(shouldContainCandidate, $"Expected r{{0}}c{{1}} should be {shouldContainCandidate}", i, j);
             }
         }
+
+        [Fact]
+        public void NoFishShouldTerminate()
+        {
+            var grid = new Grid(9).AddDefaultConstraints();
+            FishStrategy.Swordfish.Apply(grid);
+            FishStrategy.Jellyfish.Apply(grid);
+        }
     }
 }
