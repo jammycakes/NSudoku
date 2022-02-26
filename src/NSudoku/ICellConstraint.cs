@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace NSudoku
+namespace NSudoku;
+
+public interface ICellConstraint : IConstraint
 {
-    public interface ICellConstraint : IConstraint
-    {
-        ICollection<Cell> Cells { get; }
+    ICollection<Cell> Cells { get; }
 
-        bool Unique { get; }
-    }
+    bool Unique { get; }
 }
