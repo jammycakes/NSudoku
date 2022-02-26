@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NSudoku.Solving;
-using NSudoku.Strategies;
+using NSudoku.Solving.Solving;
 using Xunit;
 
 namespace NSudoku.Tests.Strategies;

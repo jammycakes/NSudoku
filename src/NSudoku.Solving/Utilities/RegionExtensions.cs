@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NSudoku.Util;
 
-namespace NSudoku.Strategies.Utilities;
+namespace NSudoku.Solving.Utilities;
 
 public static class RegionExtensions
 {

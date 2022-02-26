@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using NSudoku.Constraints;
-using NSudoku.Strategies;
 
-namespace NSudoku.Solving;
+namespace NSudoku.Solving.Solving;
 
 public class Solver
 {

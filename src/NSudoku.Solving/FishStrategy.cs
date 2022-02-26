@@ -3,7 +3,7 @@ using System.Linq;
 using NSudoku.Constraints;
 using NSudoku.Util;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     /// <summary>
     ///  Implements the "fish" class of sudoku solving techniques (X-wing, swordfish, jellyfish etc).

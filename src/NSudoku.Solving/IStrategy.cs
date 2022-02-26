@@ -1,4 +1,4 @@
-namespace NSudoku;
+namespace NSudoku.Solving;
 
 public interface IStrategy
 {

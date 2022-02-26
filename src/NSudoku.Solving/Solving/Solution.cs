@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NSudoku.Solving;
+namespace NSudoku.Solving.Solving;
 
 public class Solution
 {

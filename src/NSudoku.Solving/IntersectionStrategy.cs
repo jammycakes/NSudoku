@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using NSudoku.Strategies.Objects;
-using NSudoku.Strategies.Utilities;
+using NSudoku.Solving.Objects;
+using NSudoku.Solving.Utilities;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     public class IntersectionStrategy : IStrategy
     {

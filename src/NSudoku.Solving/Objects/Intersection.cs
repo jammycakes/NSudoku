@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NSudoku.Strategies.Objects;
+namespace NSudoku.Solving.Objects;
 
 /// <summary>
 ///  Encapsulates information about the intersection between two regions.

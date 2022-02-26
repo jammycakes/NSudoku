@@ -1,7 +1,7 @@
 using System.Linq;
 using FluentAssertions;
 using NSudoku.Constraints;
-using NSudoku.Strategies.Utilities;
+using NSudoku.Solving.Utilities;
 using Xunit;
 
 namespace NSudoku.Tests.Strategies.Utilities;

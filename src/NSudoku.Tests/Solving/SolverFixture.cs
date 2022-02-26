@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NSudoku.Solving;
+using NSudoku.Solving.Solving;
 using Xunit;
 
 namespace NSudoku.Tests.Solving;

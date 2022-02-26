@@ -1,6 +1,6 @@
 using System.Linq;
 using FluentAssertions;
-using NSudoku.Strategies;
+using NSudoku.Solving;
 using Xunit;
 
 namespace NSudoku.Tests.Strategies;

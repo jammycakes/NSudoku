@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     /* ====== Hidden singles ====== */
 

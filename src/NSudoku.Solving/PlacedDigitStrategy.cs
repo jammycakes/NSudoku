@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NSudoku.Strategies;
+namespace NSudoku.Solving;
 
 /// <summary>
 ///  This is the abstract base class for any strategy that might result
