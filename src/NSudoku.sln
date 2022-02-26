@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSudoku", "NSudoku\NSudoku.csproj", "{6EEA856D-E8B9-480E-970B-A46B9D37796F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSudoku", "NSudoku\NSudoku.csproj", "{6EEA856D-E8B9-480E-970B-A46B9D37796F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSudoku.Tests", "NSudoku.Tests\NSudoku.Tests.csproj", "{8F8E72D1-B78A-4C70-B941-5A74AE4BE630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSudoku.Tests", "NSudoku.Tests\NSudoku.Tests.csproj", "{8F8E72D1-B78A-4C70-B941-5A74AE4BE630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSudoku.Solving", "NSudoku.Solving\NSudoku.Solving.csproj", "{CDCA65BA-64EA-4E84-AA9A-6C2E0F50D59A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,15 @@ Global
 		{8F8E72D1-B78A-4C70-B941-5A74AE4BE630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F8E72D1-B78A-4C70-B941-5A74AE4BE630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F8E72D1-B78A-4C70-B941-5A74AE4BE630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDCA65BA-64EA-4E84-AA9A-6C2E0F50D59A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCA65BA-64EA-4E84-AA9A-6C2E0F50D59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCA65BA-64EA-4E84-AA9A-6C2E0F50D59A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCA65BA-64EA-4E84-AA9A-6C2E0F50D59A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F58824F-076E-4FE9-8B2B-7BEDF6524C68}
 	EndGlobalSection
 EndGlobal
