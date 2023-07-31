@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     /// <summary>
     ///  A naked single is a cell that contains only one candidate.

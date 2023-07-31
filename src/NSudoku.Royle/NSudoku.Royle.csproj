@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\NSudoku.Solving\NSudoku.Solving.csproj" />
       <ProjectReference Include="..\NSudoku\NSudoku.csproj" />
     </ItemGroup>
 

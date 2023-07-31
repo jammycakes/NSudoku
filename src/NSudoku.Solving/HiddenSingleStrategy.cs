@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     /* ====== Hidden singles ====== */
 

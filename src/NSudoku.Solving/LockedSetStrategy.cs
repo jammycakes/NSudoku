@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using NSudoku.Constraints;
-using NSudoku.Strategies.Utilities;
+using NSudoku.Solving.Utilities;
 
-namespace NSudoku.Strategies
+namespace NSudoku.Solving
 {
     public class LockedSetStrategy : IStrategy
     {
