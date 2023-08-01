@@ -23,19 +23,33 @@ public class WingStrategy : IStrategy
 
         foreach (var pivot in pivots) {
             var possibleWings =
-                from candidate in pivot.Candidates
+                (from candidate in pivot.Candidates
                 from wing in grid.GetCellsVisibleTo(pivot)
                 where wing.Candidates.Count == 2 && wing.Candidates.Has(candidate)
                 group wing by candidate
                 into g
-                select g;
+                select g)
+                .ToList();
+
+            if (possibleWings.Count < pivot.Candidates.Count) {
+                continue;
+            }
+
+            if (possibleWings.Count > pivot.Candidates.Count) {
+                throw new InvalidOperationException("This should not happen");
+            }
 
             var wingSets = possibleWings.Combinations();
             foreach (var wingSet in wingSets) {
-                // Find the other values on the wings
-                var others = wingSet.SelectMany(w => w.Candidates).Except(pivot.Candidates).ToList();
-                // If there is only one other value, then we have a wing
-                if (others.Count == 1) {
+                // Find the other values on the wings that are not on the pivot
+                // This should be a single value, repeated for each tip.
+                // If not, then we don't have a wing
+                var others = wingSet.SelectMany(w => w.Candidates)
+                    .Where(c => !pivot.Candidates.Has(c))
+                    .ToList();
+                var digitsOnOthers = others.Distinct().ToList();
+
+                if (others.Count == _size && digitsOnOthers.Count == 1) {
                     var digitToRemove = others[0];
 
                     var cells = grid.GetCellsVisibleToAll(wingSet.ToArray())
