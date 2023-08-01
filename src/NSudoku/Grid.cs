@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using NSudoku.Constraints;
 
 namespace NSudoku
 {
@@ -39,6 +41,57 @@ namespace NSudoku
         public Cell this[CellRef index] => _cells[index.Row - 1][index.Column - 1];
 
         public Cell this[byte row, byte column] => _cells[row - 1][column - 1];
+
+        /// <summary>
+        ///  Gets the cells that are visible to the given cell. This does not include the cell itself.
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <returns></returns>
+        public HashSet<Cell> GetCellsVisibleTo(Cell cell)
+        {
+            var cells = new HashSet<Cell>();
+            foreach (var constraint in this.Constraints) {
+                cells.UnionWith(constraint.GetCellsVisibleTo(cell));
+            }
+
+            return cells;
+        }
+
+        /// <summary>
+        ///  Gets the cells that are visible to all of the given cells.
+        ///  This does not include the given cells.
+        /// </summary>
+        /// <param name="cellRefs"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public IEnumerable<Cell> GetCellsVisibleToAll(params Cell[] cells)
+        {
+            if (cells.Length == 0) {
+                return Enumerable.Empty<Cell>();
+            }
+
+            var seen = GetCellsVisibleTo(cells[0]);
+            foreach (var cell in cells.Skip(1)) {
+                seen.IntersectWith(GetCellsVisibleTo(cell));
+            }
+
+            seen.ExceptWith(cells);
+            return seen;
+        }
+
+        /// <summary>
+        ///  Gets the cells that are visible to any of the given cells.
+        ///  This does not include the given cells.
+        /// </summary>
+        /// <param name="cells"></param>
+        /// <returns></returns>
+        public IEnumerable<Cell> GetCellsVisibleToAny(params Cell[] cells)
+        {
+            return cells
+                .SelectMany(GetCellsVisibleTo)
+                .Distinct()
+                .Except(cells);
+        }
 
         public IEnumerator<Cell> GetEnumerator()
         {
