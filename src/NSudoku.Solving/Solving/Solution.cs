@@ -15,6 +15,8 @@ public class Solution
 
     public IList<IStrategy> UsedStrategies { get; } = new List<IStrategy>();
 
+    public int LastStrategyIndex { get; private set; } = 0;
+
     public Solution(Grid grid, IList<IStrategy> strategies)
     {
         Grid = grid;
@@ -38,7 +40,12 @@ public class Solution
         var more = true;
         while (more) {
             more = false;
+            var index = 0;
             foreach (var strategy in Strategies) {
+                if (++index > LastStrategyIndex) {
+                    LastStrategyIndex = index;
+                }
+
                 var outcome = strategy.Apply(Grid);
                 if (outcome.HasChanges) {
                     more = Grid.CountUnplacedDigits() > 0;

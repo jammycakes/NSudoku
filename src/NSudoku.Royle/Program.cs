@@ -29,12 +29,13 @@ namespace NSudoku.Royle
                 .Add(WingStrategy.WXYZWing)
                 ;
 
+            Directory.CreateDirectory("solutions");
             using (var resource = File.OpenRead("royle.txt"))
             using (var reader = new StreamReader(resource))
             using (var writer = new StreamWriter("output.txt", false, Encoding.UTF8)) {
                 var index = 0;
                 var easies = 0;
-                writer.WriteLine("Number,Givens,Undetermined,HardestStrategy");
+                writer.WriteLine("Number,Givens,Undetermined,Difficulty,HardestStrategy");
                 string line;
                 while ((line = await reader.ReadLineAsync()) != null) {
                     line = line.Trim();
@@ -43,14 +44,42 @@ namespace NSudoku.Royle
                         var grid = Grid.Parse(line);
                         var solution = solver.Solve(grid);
                         var unplaced = grid.CountUnplacedDigits();
+
                         var result =
-                            $"{index},{line},{unplaced}";
+                            $"{index},{line},{unplaced},{solution.LastStrategyIndex}";
                         if (unplaced == 0) {
                             result += $",{solution.UsedStrategies.LastOrDefault()}";
                         }
 
                         Console.WriteLine(result);
                         writer.WriteLine(result);
+
+                        var filename = $"solutions\\{index}.txt";
+                        using (var file = File.CreateText(filename)) {
+                            file.WriteLine(line);
+                            file.WriteLine();
+                            foreach (var step in solution.Steps) {
+                                file.WriteLine(step);
+                            }
+
+                            var solved = string.Concat(
+                                grid.Select(c =>
+                                    (c.Digit.HasValue ? c.Digit.Value.ToString() : ".")));
+
+                            file.WriteLine();
+                            file.WriteLine(solved);
+
+                            if (solved.Length != line.Length) {
+                                throw new InvalidOperationException($"Solved grid {index} has wrong length");
+                            }
+
+                            if (unplaced > 0 && unplaced <= 4) {
+                                // This should never happen in a sudoku with a unique solution
+                                throw new InvalidOperationException
+                                    ($"Grid {index} unexpectedly has four or fewer unplaced candidates.");
+                            }
+                        }
+
                         if (grid.CountUnplacedDigits() == 0) {
                             easies++;
                         }
