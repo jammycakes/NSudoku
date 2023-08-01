@@ -4,12 +4,12 @@ using NSudoku.Util;
 
 namespace NSudoku.Solving;
 
-public class WingStrategy : IStrategy
+public class XYWingStrategy : IStrategy
 {
     private readonly int _size;
     private readonly string _name;
 
-    public WingStrategy(int size, string name)
+    public XYWingStrategy(int size, string name)
     {
         _size = size;
         _name = name;
@@ -89,5 +89,5 @@ public class WingStrategy : IStrategy
 
     public override string ToString() => _name;
 
-    public static WingStrategy XYWing = new WingStrategy(2, "XY-Wing");
+    public static XYWingStrategy XYWing = new(2, "XY-Wing");
 }

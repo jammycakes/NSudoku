@@ -22,11 +22,9 @@ namespace NSudoku.Royle
                 .Add(LockedSetStrategy.HiddenTriple)
                 .Add(LockedSetStrategy.HiddenQuad)
                 .Add(FishStrategy.XWing)
-                .Add(WingStrategy.XYWing)
+                .Add(XYWingStrategy.XYWing)
                 .Add(FishStrategy.Swordfish)
-                .Add(WingStrategy.XYZWing)
                 .Add(FishStrategy.Jellyfish)
-                .Add(WingStrategy.WXYZWing)
                 ;
 
             Directory.CreateDirectory("solutions");
