@@ -69,6 +69,8 @@ public class WingStrategy : IStrategy
         return StrategyResult.Unchanged;
     }
 
+    public override string ToString() => _name;
+
     public static WingStrategy XYWing = new WingStrategy(2, "XY-Wing");
 
     public static WingStrategy XYZWing = new WingStrategy(3, "XYZ-Wing");
