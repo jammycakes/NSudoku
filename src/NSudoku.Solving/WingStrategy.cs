@@ -22,13 +22,17 @@ public class WingStrategy : IStrategy
         var pivots = grid.Where(c => c.Candidates.Count == _size);
 
         foreach (var pivot in pivots) {
+            var cellsSeenByPivot = grid.GetCellsVisibleTo(pivot)
+                .Where(c => !c.HasDigit && c.Candidates.Count == 2)
+                .ToList();
+
             var possibleWings =
                 (from candidate in pivot.Candidates
-                from wing in grid.GetCellsVisibleTo(pivot)
-                where wing.Candidates.Count == 2 && wing.Candidates.Has(candidate)
-                group wing by candidate
-                into g
-                select g)
+                    from wing in cellsSeenByPivot
+                    where wing.Candidates.Has(candidate)
+                    group wing by candidate
+                    into g
+                    select g)
                 .ToList();
 
             if (possibleWings.Count < pivot.Candidates.Count) {
@@ -86,8 +90,4 @@ public class WingStrategy : IStrategy
     public override string ToString() => _name;
 
     public static WingStrategy XYWing = new WingStrategy(2, "XY-Wing");
-
-    public static WingStrategy XYZWing = new WingStrategy(3, "XYZ-Wing");
-
-    public static WingStrategy WXYZWing = new WingStrategy(4, "WXYZ-Wing");
 }
