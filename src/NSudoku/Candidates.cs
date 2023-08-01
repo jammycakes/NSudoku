@@ -117,4 +117,10 @@ public class Candidates : IEnumerable<byte>
     {
         return GetEnumerator();
     }
+
+    public Candidates Copy(Candidates other)
+    {
+        _selection = other._selection;
+        return this;
+    }
 }

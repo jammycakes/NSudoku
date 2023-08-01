@@ -50,21 +50,22 @@ public static class CollectionExtensions
         var indexes = new int[sourceList.Count];
         var maxes = source.Select(x => x.Count()).ToList();
 
-        int ix;
-
         do {
+            yield return indexes.Select((index, groupNumber) => sourceList[groupNumber][index]).ToList();
+
+            int ix = indexes.Length - 1;
+
             for (ix = indexes.Length - 1; ix >= 0; ix--) {
                 if (++indexes[ix] < maxes[ix]) {
                     break;
                 }
 
                 indexes[ix] = 0;
-                ix--;
             }
 
-            if (ix >= 0) {
-                yield return indexes.Select((index, groupNumber) => sourceList[groupNumber][index]).ToList();
+            if (ix < 0) {
+                break;
             }
-        } while (ix >= 0);
+        } while (true);
     }
 }
