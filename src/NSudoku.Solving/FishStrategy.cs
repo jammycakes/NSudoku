@@ -78,6 +78,8 @@ namespace NSudoku.Solving
             return StrategyResult.Unchanged;
         }
 
+        public override string ToString() => _name;
+
         public static FishStrategy XWing { get; } = new FishStrategy(2, "X-wing");
 
         public static FishStrategy Swordfish { get; } = new FishStrategy(3, "Swordfish");
